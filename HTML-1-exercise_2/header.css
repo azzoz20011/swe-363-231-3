@@ -1,0 +1,26 @@
+body{
+    background-color: black;
+}
+
+header {
+    background-color: rgb(36, 36, 36);
+    margin: 0cm;
+    padding: 0cm;
+}
+header, ul{
+  color: rgb(126, 134, 168);
+  text-decoration-color: aqua;
+  
+}
+
+section{
+    background-color: grey;    
+    margin: 0cm;
+    font-size: large;
+    font-weight: bold;
+}
+footer{
+    background-color: rgb(36, 36, 36);
+    margin: 0cm;
+    color: azure;
+}
