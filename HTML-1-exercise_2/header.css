@@ -1,15 +1,90 @@
-body{
-    background-color: black;
-}
 
-header {
-    background-color: rgb(36, 36, 36);
-    margin: 0cm;
-    padding: 0cm;
-    text-transform: uppercase;
-}
+/*css2 ex2 change all header cells to uppercase */
+thead{
+  text-transform: uppercase;
 
-   
+}
+/*css2 ex change all links to green color */
+a:link {
+  color: rgb(0, 128, 0);
+  margin: 5px;
+  
+  background-color: rgb(177, 173, 173);
+  text-decoration: none;
+}
+/*scc2 ex2 Go to your table cells and give top values cells a class of “top”*/ 
+td {
+  padding: 0.5em;
+    font-family: monospace;
+    vertical-align: top;
+} 
+.top{
+  background-color: rgb(236, 170, 77);
+}
+/*css2 ex2 Change the background of any <em> to blue */
+em{
+  background-color: blue;
+}
+/*css2 ex2  Change the element with id “the_most_important” to all caps and gold background.*/
+#the_most_important{
+  text-transform: uppercase;
+  background-color: gold;
+ }
+ /*css2 ex3 Change all h2 fonts family to sans-serif*/
+ h2{
+  font-family: sans-serif;
+}
+ /*css2 ex3 Capitalize all headings of any level in your code*/
+h1, h2, h3, h4, h5, h6 {
+  text-transform: uppercase;
+}
+ /*css2 ex3 Change the first paragraph’s letter after any h2 to x-large*/
+h2 + p::first-letter {
+  font-size: x-large;
+}
+ /*css2 ex3 When someone hover over any of your table rows change the background color
+ to a light color of your choice and if the cell has previous color change it also.*/
+td:hover {
+  background-color: rgb(162, 247, 232);
+}
+ /*css2 ex3Change the list items display of the navbar to inline*/
+nav li {
+  display: inline;
+}
+ /*css2 ex3 Change the link of the first nav item to underlined and the others without*/
+.navbar-nav li:first-child {
+  text-decoration: underline;
+}
+ /*css2 ex3 Use nth-child to make all table’s body rows background colors alternating*/
+tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+tr:nth-child(even) {
+  background-color: #d6eeee;
+}
+ /*css2 ex3 When someone highlights a text in your text, change the highlighting color to a color of your choice*/
+::selection {
+  color: white;
+  background-color: rgb(238, 223, 9);
+}
+ /*css2 ex3 When someone hovers over your webpage body links (not nav) change the cursor to a pointer*/
+body a {
+  cursor: pointer;
+}
+nav a {
+  cursor: default;
+}
+ /*css2 ex3Change all input fields height to 20px;
+ Change the border color of all inputs of type text to light gray*/
+input {
+  line-height: 20px;
+  border-color:lightgray;
+}
+ /*css2 ex3Change input of name message height to 50px*/
+textarea:massage {
+  height: 50px;
+}
+/*css3 ex3 Make the background color of your website buttons change smoothly when they are hovered over*/
 input {
     background-color: aliceblue;
     transition-duration:1s;
@@ -17,13 +92,8 @@ input {
 input:hover {
     background-color: aqua;
 }
-a:link {
-    color: rgb(0, 128, 0);
-    margin: 5px;
-    
-    background-color: rgb(177, 173, 173);
-    text-decoration: none;
-}
+/*css3 ex3 Add a Hamburger icon at the beginning of your navbar and hide its elements by default.
+ When some hover over the navbar icon show them one after the other (add some delay).*/
 a:link:hover{
     background-color: rgb(248, 248, 248);
     transition-duration: 0.5s;
@@ -46,41 +116,14 @@ a:active {
     background-color: transparent;
     text-decoration: underline;
 }
-thead{
-    text-transform: uppercase;
 
-}
 header, ul{
   color: rgb(126, 134, 168);
   text-decoration-color: aqua;
   
 }
 
-section{
-    background-color: grey;    
-    margin: 0cm;
-    font-size: large;
-    font-weight: bold;
-}
-footer{
-    background-color: rgb(36, 36, 36);
-    margin: 0cm;
-    color: azure;
-}
 
-td {
-  padding: 0.5em;
-    font-family: monospace;
-    vertical-align: top;
-
-
-} 
-td:hover {
-    background-color: rgb(162, 247, 232);
-  }
-em{
-    background-color: blue;
-}
 footer{
     padding-top: 2em;
     vertical-align: bottom ;
@@ -90,19 +133,10 @@ p{
     padding: 2em;
 
 }
-#the_most_important{
- text-transform: uppercase;
-}
-h2{
-    font-family: sans-serif;
 
-}
-h1, h2, h3, h4, h5, h6 {
-    text-transform: uppercase;
-}
-h2 + p::first-letter {
-    font-size: x-large;
-  }
+
+
+
   nav {
     background-color: #333;
   }
@@ -124,60 +158,10 @@ h2 + p::first-letter {
     display: inline;
 
   }
-  nav li {
-    display: inline;
-
-  }
-  .navbar-nav li {
-    text-decoration:;
-    cursor:default;
-
-  }
-  .navbar-nav img {
-    opacity: 0;
-    transition-delay: 2s;
-  }
-  .navbar-nav :first-child {
-    opacity: 0;
-    transition-delay: 3s;
-  }
-  .navbar-nav:second-child {
-    opacity: 0;
-    transition-delay: 4s;
-  }
-  .navbar-nav:third-child {
-    opacity: 0;
-    transition-delay: 5s;
-  }
-
-  .navbar-nav :hover {
-    opacity: 1;
-
-  }
+ 
+ 
   
- /* .navbar-nav li:first-child {
-    text-decoration: underline;
-  }*/
-  tr:nth-child(odd) {
-    background-color: #f2f2f2;
-  }
   
-  tr:nth-child(even) {
-    background-color: #d6eeee;
-  }
-  ::selection {
-    color: white;
-    background-color: rgb(238, 223, 9);
-  }
-  body a {
-    cursor: pointer;
-  }
-  input {
-    line-height: 20px;
-    border-color: gray;
-
-  }
-  textarea:massage {
-    height: 50px;
-  }
+  
+  
   
