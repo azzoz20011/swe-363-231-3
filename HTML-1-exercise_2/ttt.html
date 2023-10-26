@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .cell {
+            font-family: sans-serif;
+            font-size: larger;
+            font-weight: bolder;
+            background-color: beige;
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cell:hover {
+            background-color: blanchedalmond;
+        }
+
+        .row {
+            display: flex;
+        }
+        p{
+            margin-bottom: 20px;
+            margin-top: 0;
+        }
+        :root {
+            --orange: #F2C14E;
+            --winning-blocks: #b98c23;
+        }
+        /*customizing the button */
+        button {
+            padding: 10px 20px;
+            border-radius: 10px;
+            background-color: var(--orange);
+            color: #333;
+            border-color: var(--orange);
+            font-size: 18px;
+            transition: 200ms transform;
+            font-weight: 600;
+        }
+        button:hover {
+            cursor: pointer;
+            transform: translateY(-2px);
+        }
+       
+    </style>
+</head>
+
+<body>
+    <!--change the heading design for easier implemintation with JS-->
+    <h1 id="turn">
+        Now it's is turn of
+    </h1>
+    <h1 id="turn1">X</h1>
+    <p>
+    <button id="restartBtn">Restart</button>
+    <!-- Board --></p>
+    <div class="board">
+        <div class="row">
+            <!--added id because i thought it easier to target cells-->
+            <div class="cell"id="0"></div>
+            <div class="cell"id="1"></div>
+            <div class="cell"id="2"></div>
+        </div>
+        <div class="row">
+            <div class="cell"id="3"></div>
+            <div class="cell"id="4"></div>
+            <div class="cell"id="5"></div>
+        </div>
+        <div class="row">
+            <div class="cell" id="6"></div>
+            <div class="cell" id="7"></div>
+            <div class="cell" id="8"></div>
+        </div>
+        <script>
+            //use get to get header, restart button, and cells.
+            let header = document.getElementById('turn')
+            let restartBtn = document.getElementById('restartBtn')
+            let celles = Array.from(document.getElementsByClassName('cell'))
+            // for coloring cells
+            let playingIndicator = getComputedStyle(document.body).getPropertyValue('--winning-blocks')
+            //to use it to inter "x" or "o"
+            let turn = "X"
+            // to make a Drow
+            let gameEnded = false
+            // helpful to fill the cell so the player can not play over played cell
+            let cells = Array(9).fill(null)
+            // to know the winning batterns
+            const winningCombos = [
+                [0,1,2],
+                [3,4,5],
+                [6,7,8],
+                [0,3,6],
+                [1,4,7],
+                [2,5,8],
+                [0,4,8],
+                [2,4,6]
+            ]
+
+            // when we click on a cell add the letter 
+            const startGame = () => {
+                celles.forEach(cell => cell.addEventListener('click', cellClicked))
+            }
+
+              function cellClicked(event) {
+                const id = event.target.id
+                //is the clicked cell empty?
+                if(!cells[id]){
+                    cells[id] = turn              
+                    event.target.innerText = turn
+                    
+                    // to declare a winner
+                    if(playerHasWon() !==false){
+                        header.innerHTML = `${turn} has won!`
+                        let winning_blocks = playerHasWon()
+                        //to colour the clicked cell
+                        winning_blocks.map( cell => celles[cell].style.backgroundColor=playingIndicator)
+                        return
+                    }
+                    //change the turn
+                    turn = turn === "X" ? "O" : "X"
+                    
+                    turnLetter = document.querySelector("#turn1")
+                    turnLetter.innerText = turn
+                    // change the header
+                    event.target.style.backgroundColor=playingIndicator
+                    let counter = 0
+                    // to make a condition forDrow 
+                    for (let i = 0; i < 9; i++) {
+                        
+                        if (cells[i] != null) {
+                            counter = counter +1
+                           
+                        } 
+                        if(counter === 9){
+                            gameEnded = true
+                        }
+                        console.log(counter)
+                    }
+                }
+                //declare a Drow
+                if (gameEnded) {
+                    header.innerText = "Drow"
+                } 
+            }
+            //check if a player has won
+            function playerHasWon() {
+                for (const condition of winningCombos) {
+                    let [a, b, c] = condition
+
+                    if(cells[a] && (cells[a] == cells[b] && cells[a] == cells[c])) {
+                        return [a,b,c]
+                    }
+                }
+                return false
+            }
+            
+            //restart function
+            restartBtn.addEventListener('click', restart)
+
+            function restart() {
+                //reset all values
+                cells.fill(null)
+
+                celles.forEach( cell => {
+                    cell.innerText = ''
+                    cell.style.backgroundColor=''
+                })
+
+                header.innerText = "Now it's is turn of"
+
+                turn = "X"
+            }
+            startGame()
+        </script>
+    </div>
+</body>
+
+</html>

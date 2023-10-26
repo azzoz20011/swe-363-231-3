@@ -7,8 +7,7 @@ body{
 }
 header {
     background-color: rgb(36, 36, 36);
-    margin: 0cm;
-    padding: 0cm;
+    height: 80px;
     text-transform: uppercase;
 }
 section{
@@ -16,9 +15,14 @@ section{
     margin: 0cm;
     font-size: large;
     font-weight: bold;
+    margin: 20px;
+    height: 1000px;
+    
 }
 footer{
     background-color: rgb(36, 36, 36);
     margin: 0cm;
     color: azure;
+    margin: 10px;
+    height: 80px;;
 }
