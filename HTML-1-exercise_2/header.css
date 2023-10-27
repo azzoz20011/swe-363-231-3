@@ -186,3 +186,15 @@ a{
     left: 0;
   }
 }*/
+#domList{
+  color: rgb(34, 36, 36);
+  list-style-type: circle;
+  margin-left: 20px;
+}
+.listing{
+  list-style-type: circle;
+}
+#topic{
+  margin-top: 50px;
+ 
+}
