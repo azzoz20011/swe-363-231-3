@@ -1,8 +1,11 @@
 
 //make the usuall sitting such as require express 
+const mongoose = require('mongoose');
 const express = require('express');
 const app = express()
 const path = require("path")
+const collections = require('./mongodb'); 
+const bodyParser = require('body-parser');
 //const tempelatePath=path.join(__dirname,'../templates')
 
 
@@ -10,6 +13,7 @@ const path = require("path")
 app.use(express.static('./src'))
 app.use(express.static('./public'))
 app.use(express.static('./templates'))
+app.use(express.urlencoded({extended:false}))
 
 //get the main page and all other pages using get method
 app.get('/',(req,res) =>{
@@ -28,7 +32,24 @@ app.get("/send",(req,res) =>{
     res.sendFile(path.resolve(__dirname,'./templates/send2.html'))
 })
 
-app.post("/send/thanks",(req,res) =>{
+app.post("/send",async(req,res) =>{
+    
+    const data={
+        name:req.body.name,
+        email:req.body.email,
+        sex:req.body.sex,
+       
+        massage:req.body.massage,
+        mailMe:req.body.mailMe,
+        rateMe:req.body.rateMe,
+    }
+    await collections.insertMany([data])
+    console.log(data)
+    console.log('data sent')
+    res.sendFile(path.resolve(__dirname,'./templates/thanks.html'))
+})
+
+app.get("/send/thanks",(req,res) =>{
     res.sendFile(path.resolve(__dirname,'./templates/thanks.html'))
 })
 
