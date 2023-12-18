@@ -6,6 +6,9 @@ const app = express()
 const path = require("path")
 const collections = require('./mongodb'); 
 const bodyParser = require('body-parser');
+
+const sendRoute = require('./src/send')
+app.use('/send',sendRoute)
 //const tempelatePath=path.join(__dirname,'../templates')
 
 
