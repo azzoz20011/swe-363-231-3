@@ -13,8 +13,4 @@ class article{
         li.appendChild(para)
         return li
     }
-//     add{
-
-//     }   
-//     for (const)
-// }
+}
