@@ -6,6 +6,68 @@ const app = express()
 const path = require("path")
 const collections = require('./mongodb'); 
 const bodyParser = require('body-parser');
+const fs = require("fs");
+
+const crypto = require('crypto');
+const algorithm = 'aes-256-cbc'; //Using AES encryption
+const key = crypto.randomBytes(32);
+const iv = crypto.randomBytes(16);
+
+//Encrypting text
+function encrypt(text) {
+   let cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(key), iv);
+   let encrypted = cipher.update(text);
+   encrypted = Buffer.concat([encrypted, cipher.final()]);
+   return { iv: iv.toString('hex'), encryptedData: encrypted.toString('hex') };
+}
+
+// Decrypting text
+function decrypt(text) {
+   let iv = Buffer.from(text.iv, 'hex');
+   let encryptedText = Buffer.from(text.encryptedData, 'hex');
+   let decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
+   let decrypted = decipher.update(encryptedText);
+   decrypted = Buffer.concat([decrypted, decipher.final()]);
+   return decrypted.toString();
+}
+
+// Text send to encrypt function
+var hw = encrypt("Welcome to Tutorials Point...")
+console.log(hw)
+console.log(decrypt(hw))
+
+function authentication(req, res, next) {
+    const authheader = req.headers.authorization;
+    console.log(req.headers);
+ 
+    if (!authheader) {
+        let err = new Error('You are not authenticated!');
+        res.setHeader('WWW-Authenticate', 'Basic');
+        err.status = 401;
+        return next(err)
+    }
+ 
+    const auth = new Buffer.from(authheader.split(' ')[1],
+        'base64').toString().split(':');
+    const user = auth[0];
+    const pass = auth[1];
+ 
+    if (user == 'admin' && pass == 'password') {
+ 
+        // If Authorized user
+        next();
+    } else {
+        let err = new Error('You are not authenticated!');
+        res.setHeader('WWW-Authenticate', 'Basic');
+        err.status = 401;
+        return next(err);
+    }
+ 
+}
+ 
+// First step is the authentication of the client
+app.use(authentication)
+app.use(express.static(path.join(__dirname, 'public')));
 
 const sendRoute = require('./src/send')
 app.use('/send',sendRoute)
